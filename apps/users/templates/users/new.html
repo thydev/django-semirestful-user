@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>New user</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'users/css/style.css' %}">
+</head>
+<body>
+    <div class="">
+        <a href="/users">Home</a>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <form action="/users/create" method="POST">
+            {% csrf_token %}
+            <h1>Add a user:</h1>
+            <p>First Name: <input type="text" name="first_name"></p>
+            <p>Last name: <input type="text" name="last_name"></p>
+            <p>Email: <input type="email" name="email"></p>
+            <input type="submit" value="Create">
+        </form>
+        
+    </div>
+</body>
+</html>

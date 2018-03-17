@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edit user</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'users/css/style.css' %}">
+</head>
+<body>
+    <div class="">
+        <a href="/users">Home</a>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <form action="/users/update" method="POST">
+            {% csrf_token %}
+            <h1>Edit a user:</h1>
+            <input type="hidden" name="user_id" value="{{user.id}}">
+            <p>First Name: <input type="text" name="first_name" value="{{ user.first_name }}"></p>
+            <p>Last name: <input type="text" name="last_name" value="{{ user.last_name }}"></p>
+            <p>Email: <input type="email" name="email" value="{{ user.email }}"></p>
+            <input type="submit" value="Update">
+        </form>
+    </div>
+</body>
+</html>
